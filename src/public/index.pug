@@ -1,0 +1,62 @@
+html(ng-app="demoApp")
+  head
+    title Pizza Payment Demo
+    link(href='vendor/angular-material.min.css', rel='stylesheet', type='text/css')
+    link(href='index.css', rel='stylesheet', type='text/css')
+  body(ng-controller="appController" ng-click="tapped($event)" ng-mousemove="mouseMoved($event)" ng-cloak="")
+    ripples
+      .ripple(ng-repeat="r in ripples", ng-style="{ top: r.y + 'px', left: r.x + 'px' }")
+    md-toolbar.md-hue-2
+      .md-toolbar-tools( layout="row" layout-align="center center" flex )
+        h2.md-flex Order Pizzas
+    md-content(layout="column" layout-align="start center" flex layout-fill )
+      h2 Pick A Size
+      .pick-size(layout="row" layout-align="space-around center")
+        md-card.pizza-item(ng-repeat="item in pizza.items"  flex="50" ng-click="changePizzaOrder(item,$event)")
+            md-card-title
+              md-card-title-text {{item.size | capitalize}} {{item.price | currency}}
+              md-card-title-media
+                div.md-media-lg.card-media.item-media(ng-class="[item.size]" ng-style="{'background-image':'url(images/pizza.jpg)'}")
+      h2 Pick Meats
+      .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
+        md-card.modifier-item(ng-repeat="meat in pizza.modifiers.meats" flex="33"  ng-click="toggleModifier(meat,$event)" )
+          md-card-title
+            md-card-title-text {{meat.name  | capitalize | deslug}} {{meat.price | currency}}
+            md-card-title-media
+              div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ meat.name+'.jpg)'}")
+      h2 Pick Veggies 
+      .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
+        md-card.modifier-item(ng-repeat="veggie in pizza.modifiers.veggies"  flex="33" ng-click="toggleModifier(veggie,$event)")
+          md-card-title
+            md-card-title-text {{veggie.name | capitalize | deslug}} {{veggie.price | currency}}
+            md-card-title-media
+              div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ veggie.name +'.jpg)'}")
+      
+      .pizza-total(layout="column" layout-align="center center" ng-cloak ng-if="pizzaTotal") 
+        .total.md-headline Total
+        .amount {{pizzaTotal | currency}}
+        md-button.md-primary.md-raised(ng-click="showCart(pizzaOrder, $event)") Add To Cart
+    .invisible
+        .md-dialog-container#addToCartDialog
+          md-dialog
+            md-dialog-content.md-dialog-content(layout='column')
+              h2.md-title Pizza Cart
+              md-card
+                md-card-title
+                  md-card-title-text 
+                    pre {{cart | json}}
+
+            md-dialog-actions
+              button.md-button.md-cancel-button.md-primary(ng-click='makeAnotherPizza()') Add Another Pizza
+              button.md-button.md-confirm-button.md-primary(ng-click='checkOutNow()') Checkout Now
+    script(src="vendor/lodash.min.js")
+    script(src="vendor/angular.min.js")
+    script(src="vendor/angular-animate.min.js")
+    script(src="vendor/angular-aria.min.js")
+    script(src="vendor/angular-messages.min.js")
+
+    script(src="vendor/angular-material.min.js")
+    script(src="js/config.js")
+    script(src="js/dataService.js")
+    script(src="js/appController.js")
+

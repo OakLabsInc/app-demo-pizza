@@ -1,0 +1,149 @@
+body,
+html {
+  background-color: #fff;
+}
+body *,
+html * {
+  outline: none;
+  box-sizing: border-box;
+}
+body .md-toolbar-tools,
+html .md-toolbar-tools {
+  display: flex;
+}
+body md-content::before,
+html md-content::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  z-index: -1;
+  background-image: url("images/pizza.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255,255,255,0.5);
+}
+body md-content,
+html md-content {
+  position: relative;
+  z-index: 1;
+}
+body md-content h2,
+html md-content h2 {
+  color: #000;
+}
+body md-content md-card,
+html md-content md-card {
+  flex-wrap: wrap;
+  border: 3px solid transparent;
+}
+body md-content md-card md-card-title,
+html md-content md-card md-card-title {
+  pointer-events: none;
+}
+body md-content md-card md-card-title *,
+html md-content md-card md-card-title * {
+  pointer-events: none;
+}
+body md-content md-card .item-media,
+html md-content md-card .item-media {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+body md-content md-card .item-media.small,
+html md-content md-card .item-media.small,
+body md-content md-card .item-media.medium,
+html md-content md-card .item-media.medium,
+body md-content md-card .item-media.large,
+html md-content md-card .item-media.large {
+  background-size: contain;
+}
+body md-content md-card.selected,
+html md-content md-card.selected {
+  border: 3px solid #008000;
+}
+.invisible {
+  visibility: hidden;
+}
+ripples {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+.ripple {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  margin-left: -0.5em;
+  border: 2px solid rgba(34,34,34,0.7);
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: rippleOut;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+@-moz-keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}
+@-o-keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes rippleOut {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(2.2);
+    opacity: 0;
+  }
+}

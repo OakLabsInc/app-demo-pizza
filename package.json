@@ -1,0 +1,42 @@
+{
+  "name": "pizza-demo-application",
+  "version": "0.0.1",
+  "description": "Wayfinding app for OakOS v5.0.x",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node_modules/.bin/oak .",
+    "dev": "npm start",
+    "rebuild": "rm -rf node_modules/ package-lock.json && npm install",
+    "gulp": "./node_modules/.bin/gulp",
+    "create": "node ./create-site.js",
+    "test": "exit 0;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OakLabsInc/app-demo-pizza.git"
+  },
+  "author": "Richard Joffray <richard@joffray.com>",
+  "license": "Apache 2",
+  "bugs": {
+    "url": "https://github.com/OakLabsInc/app-demo-pizza/issues"
+  },
+  "homepage": "https://github.com/OakLabsInc/app-demo-pizza#readme",
+  "devDependencies": {
+    "archiver": "~3.1.1",
+    "gulp": "~3.9.1",
+    "gulp-pug": "~3.3.0",
+    "gulp-stylus": "~2.6.0",
+    "gulp-watch": "~5.0.1",
+    "lodash.template": "~4.5.0",
+    "oak": "5.0.10",
+    "standard": "~11.0.1"
+  },
+  "dependencies": {
+    "express": "~4.16.3",
+    "lodash": "~4.17.4",
+    "nib": "~1.1.2",
+    "pug-cli": "~1.0.0-alpha6",
+    "stylus": "~0.54.5"
+  },
+  "private": true
+}
