@@ -19,6 +19,15 @@ npm run rebuild
 npm run dev
 ```
 
+### Create a Zip Archive for demo app
+
+``` bash
+npm run create
+```
+
+Now you can use the files created in the `dist` folder to upload into the Demo Administrator at
+[https://oak-app-demo.web.app/](https://oak-app-demo.web.app/)
+
 ### Running in a docker container
 
 ``` bash
