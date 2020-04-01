@@ -9,6 +9,7 @@ if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
 
+fs.createReadStream(join(__dirname,'src','public','images','pizza.jpg')).pipe(fs.createWriteStream(join(__dirname,'dist','pizza.jpg')));
 // create a file to stream archive data to.
 var output = fs.createWriteStream(join(__dirname,'dist','pizza.zip'));
 var archive = archiver('zip', {
