@@ -5,7 +5,7 @@
     <link href="vendor/angular-material.min.css" rel="stylesheet" type="text/css"/>
     <link href="index.css" rel="stylesheet" type="text/css"/>
   </head>
-  <body ng-controller="appController" ng-click="tapped($event)" ng-mousemove="mouseMoved($event)" ng-cloak="">
+  <body ng-controller="appController" ng-click="tapped($event); idleTimeout()" ng-mousemove="mouseMoved($event)" ng-cloak="">
     <ripples>
       <div class="ripple" ng-repeat="r in ripples" ng-style="{ top: r.y + 'px', left: r.x + 'px' }"></div>
     </ripples>
@@ -26,7 +26,7 @@
       </div>
       <h2 class="md-headline">Pick Meats</h2>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
-        <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-click="toggleModifier(meat,$event)">
+        <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.size}">
           <md-card-title>
             <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{meat.name  | capitalize | deslug}}</span><span>{{meat.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
@@ -37,7 +37,7 @@
       </div>
       <h2 class="md-headline">Pick Veggies </h2>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
-        <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-click="toggleModifier(veggie,$event)">
+        <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.size}">
           <md-card-title>
             <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{veggie.name | capitalize | deslug}}</span><span>{{veggie.price | currency}}</span></md-card-title-text>
             <md-card-title-media>

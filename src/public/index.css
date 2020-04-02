@@ -54,13 +54,18 @@ body md-content md-card,
 html md-content md-card {
   flex-wrap: wrap;
   border: 3px solid transparent;
+  pointer-events: auto;
+}
+body md-content md-card.no-click,
+html md-content md-card.no-click {
+  pointer-events: none;
+}
+body md-content md-card *,
+html md-content md-card * {
+  pointer-events: none;
 }
 body md-content md-card md-card-title,
 html md-content md-card md-card-title {
-  pointer-events: none;
-}
-body md-content md-card md-card-title *,
-html md-content md-card md-card-title * {
   pointer-events: none;
 }
 body md-content md-card .item-media,

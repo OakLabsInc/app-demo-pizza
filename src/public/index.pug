@@ -3,7 +3,7 @@ html(ng-app="demoApp")
     title Pizza Payment Demo
     link(href='vendor/angular-material.min.css', rel='stylesheet', type='text/css')
     link(href='index.css', rel='stylesheet', type='text/css')
-  body(ng-controller="appController" ng-click="tapped($event)" ng-mousemove="mouseMoved($event)" ng-cloak="")
+  body(ng-controller="appController" ng-click="tapped($event); idleTimeout()" ng-mousemove="mouseMoved($event)" ng-cloak="")
     ripples
       .ripple(ng-repeat="r in ripples", ng-style="{ top: r.y + 'px', left: r.x + 'px' }")
 
@@ -12,7 +12,7 @@ html(ng-app="demoApp")
         .logo
       h2.md-headline Pick a Size
       .pick-size(layout="row" layout-align="space-around center")
-        md-card.pizza-item(ng-repeat="item in pizza.items"  flex="50" ng-click="changePizzaOrder(item,$event)")
+        md-card.pizza-item(ng-repeat="item in pizza.items"  flex="50" ng-click="changePizzaOrder(item,$event)" )
             md-card-title
               md-card-title-text(layout="column" layout-align="start start") 
                 span.md-headline {{item.size | capitalize}}
@@ -21,7 +21,7 @@ html(ng-app="demoApp")
                 div.md-media-lg.card-media.item-media(ng-class="[item.size]" ng-style="{'background-image':'url(images/pizza.png)'}")
       h2.md-headline Pick Meats
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
-        md-card.modifier-item(ng-repeat="meat in pizza.modifiers.meats" flex="33"  ng-click="toggleModifier(meat,$event)" )
+        md-card.modifier-item(ng-repeat="meat in pizza.modifiers.meats" flex="33"  ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.size}")
           md-card-title
             md-card-title-text(layout="column" layout-align="start start")
               span.md-headline {{meat.name  | capitalize | deslug}}
@@ -30,7 +30,7 @@ html(ng-app="demoApp")
               div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ meat.name+'.jpg)'}")
       h2.md-headline Pick Veggies 
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
-        md-card.modifier-item(ng-repeat="veggie in pizza.modifiers.veggies"  flex="33" ng-click="toggleModifier(veggie,$event)")
+        md-card.modifier-item(ng-repeat="veggie in pizza.modifiers.veggies"  flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.size}")
           md-card-title
             md-card-title-text(layout="column" layout-align="start start")
               span.md-headline {{veggie.name | capitalize | deslug}}

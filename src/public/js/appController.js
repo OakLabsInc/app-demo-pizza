@@ -7,11 +7,13 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
     $scope.showCursor = false
     $scope.shouldReload = false
     $scope.cursorTimeout = 10000
+
     var cursorPromises = []
     var timer
   
     // main window touches. this will log all tapped items, and also add the UI ripple of the tapped area
     $scope.ripples = []
+    $scope.timer = null
     $scope.mouseMoved = function ({ pageX: x, pageY: y }) {
       // dont show cursor if the settings has `false` or 0 as the cursorTimeout
       if ($scope.cursorTimeout) {
@@ -39,6 +41,7 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
     })
   
     $scope.tapped = function ({ pageX, pageY }) {
+
       let id = Date.now().toString()
       $scope.showCursor = false
       $scope.ripples.push({
@@ -131,8 +134,27 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
             // called asynchronously if an error occurs
             // or server returns response with an error status.
           })
+          
     }
 
-    oak.ready()
+    $scope.idleTimeout = function(ev) {
+ 
+      $window.onload = $scope.resetTimer;
+      $window.ontouchstart = $scope.resetTimer; // catches touchscreen swipes as well 
+      $window.onclick = $scope.resetTimer;      // catches touchpad clicks as well
+      $window.onkeypress = $scope.resetTimer;   
+      $window.addEventListener('scroll', $scope.resetTimer, true); // improved; see comments
+    }
+
+    $scope.timedOut = function(){
+      oak.reload()
+    }
+
+    $scope.resetTimer = function() {
+      clearTimeout($scope.timer);
+      $scope.timer = setTimeout($scope.timedOut, 120000);  // time is in milliseconds
+    }
+    
+    oak.ready()   
 
   })

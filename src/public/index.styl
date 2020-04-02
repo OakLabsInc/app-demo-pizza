@@ -5,6 +5,7 @@ body, html
   *
     outline: none
     box-sizing: border-box
+  
   .md-toolbar-tools
     display flex
   .logo-container
@@ -40,10 +41,13 @@ body, html
     md-card
       flex-wrap wrap
       border 3px solid transparent
+      pointer-events auto
+      &.no-click
+        pointer-events none
+      *
+        pointer-events none
       md-card-title
         pointer-events none
-        *
-          pointer-events none
       .item-media
         background-repeat no-repeat
         background-size cover
