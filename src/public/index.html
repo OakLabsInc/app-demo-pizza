@@ -55,19 +55,22 @@
     <div class="invisible">
       <div class="md-dialog-container" id="addToCartDialog">
         <md-dialog>
-          <md-dialog-content class="md-dialog-content" layout="column">
-            <h2 class="md-title">Pizza Cart</h2>
-            <md-card>
-              <md-card-title>
-                <md-card-title-text> 
-                  <pre>{{cart | json}}</pre>
-                </md-card-title-text>
-              </md-card-title>
-            </md-card>
+          <md-dialog-content class="md-dialog-content" layout="column" layout-align="stretch">
+            <h2 class="md-headline" layout-align="center">Pizza Cart</h2>
+            <div class="order">
+              <div class="cart-items" ng-repeat="item in cart track by $index">
+                <md-divider class="bottom-space"></md-divider>
+                <div class="item" layout="row" layout-align="space-between start"><span>{{item.size | capitalize}} Pizza</span><span>{{item.price | currency}}</span></div>
+                <div class="item-description md-subhead" ng-repeat="mod in item.modifiers" layout="row" layout-align="space-between start"><span>{{mod.name | capitalize}} Topping</span><span>{{mod.price | currency}}</span></div>
+              </div>
+              <md-divider class="top-space bottom-space"></md-divider>
+              <div class="cart-tax" layout="row" layout-align="end start"><span>8.6% Tax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cart.tax | currency}}</span></div>
+              <div class="cart-total" layout="row" layout-align="end start"><span>Total&nbsp;&nbsp;&nbsp;{{ cart.total | currency}}</span></div>
+            </div>
           </md-dialog-content>
           <md-dialog-actions>
-            <button class="md-button md-cancel-button md-primary" ng-click="makeAnotherPizza()">Add Another Pizza</button>
-            <button class="md-button md-confirm-button md-primary" ng-click="checkOutNow()">Checkout Now</button>
+            <button class="md-button md-primary md-raised" ng-click="makeAnotherPizza()">Add Another Pizza</button>
+            <button class="md-button md-primary md-raised" ng-click="checkOutNow()">Checkout Now</button>
           </md-dialog-actions>
         </md-dialog>
       </div>

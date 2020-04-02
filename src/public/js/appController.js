@@ -107,7 +107,11 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
     
     $scope.showCart = function(pizzaToAdd, ev) {
       pizzaToAdd.total = $scope.pizzaTotal
+      pizzaToAdd.id = Date.now()
       $scope.cart.push(pizzaToAdd)
+      $scope.cart.subtotal = _($scope.cart).sumBy('total')
+      $scope.cart.tax = $scope.cart.subtotal * .086
+      $scope.cart.total = _($scope.cart).sumBy('total') + $scope.cart.tax
       // Appending dialog to document.body to cover sidenav in docs app
       var cartView = $mdDialog.show({
         scope: $scope,

@@ -45,16 +45,26 @@ html(ng-app="demoApp")
     .invisible
         .md-dialog-container#addToCartDialog
           md-dialog
-            md-dialog-content.md-dialog-content(layout='column')
-              h2.md-title Pizza Cart
-              md-card
-                md-card-title
-                  md-card-title-text 
-                    pre {{cart | json}}
+            md-dialog-content.md-dialog-content(layout='column' layout-align="stretch")
+              h2.md-headline(layout-align="center") Pizza Cart
+              .order
+                .cart-items(ng-repeat="item in cart track by $index")
+                  md-divider.bottom-space
+                  .item(layout="row" layout-align="space-between start")
+                    span {{item.size | capitalize}} Pizza
+                    span {{item.price | currency}}
+                  .item-description.md-subhead(ng-repeat="mod in item.modifiers" layout="row" layout-align="space-between start")
+                    span {{mod.name | capitalize}} Topping
+                    span {{mod.price | currency}}
+                md-divider.top-space.bottom-space
+                .cart-tax(layout="row" layout-align="end start")
+                    span 8.6% Tax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cart.tax | currency}}
+                .cart-total(layout="row" layout-align="end start")
+                    span Total&nbsp;&nbsp;&nbsp;{{ cart.total | currency}}
 
             md-dialog-actions
-              button.md-button.md-cancel-button.md-primary(ng-click='makeAnotherPizza()') Add Another Pizza
-              button.md-button.md-confirm-button.md-primary(ng-click='checkOutNow()') Checkout Now
+              button.md-button.md-primary.md-raised(ng-click='makeAnotherPizza()') Add Another Pizza
+              button.md-button.md-primary.md-raised(ng-click='checkOutNow()') Checkout Now
     script(src="vendor/lodash.min.js")
     script(src="vendor/angular.min.js")
     script(src="vendor/angular-animate.min.js")

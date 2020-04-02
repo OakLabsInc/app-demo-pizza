@@ -8,6 +8,14 @@ html * {
   outline: none;
   box-sizing: border-box;
 }
+body md-divider.top-space,
+html md-divider.top-space {
+  margin-top: 5px;
+}
+body md-divider.bottom-space,
+html md-divider.bottom-space {
+  margin-bottom: 5px;
+}
 body .md-toolbar-tools,
 html .md-toolbar-tools {
   display: flex;
@@ -100,6 +108,9 @@ html md-content md-card.selected {
 }
 .invisible {
   visibility: hidden;
+}
+.item-description {
+  margin-left: 15px;
 }
 ripples {
   position: absolute;
