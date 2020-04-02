@@ -1,10 +1,21 @@
 body, html
+
+  background-color rgb(249,249,249)
+  overflow hidden
   *
-    outline: none;
-    box-sizing: border-box;
-  background-color #FFFFFF
+    outline: none
+    box-sizing: border-box
   .md-toolbar-tools
     display flex
+  .logo-container
+    background-color transparent
+    .logo
+      background-image url(images/logo.png)
+      background-repeat no-repeat
+      background-size cover
+      width 300px
+      height 300px
+
   md-content::before
     content: " ";
     position: absolute;
@@ -18,9 +29,10 @@ body, html
     background-image url(images/pizza.jpg)
     background-repeat no-repeat
     background-size cover
-    background-position center
+    background-position 45% 130px 
     background-color rgba(255,255,255,.5)
   md-content
+    background-color transparent
     position: relative;
     z-index: 1;
     h2
@@ -38,8 +50,16 @@ body, html
         background-position center
         &.small,&.medium,&.large
           background-size contain
+        &.medium
+          height 200px
+          width 200px
+        &.large
+          height 250px
+          width 250px
       &.selected
         border 3px solid green
+        background-color rgba(228,126,35,.85)
+        color #ffffff
 .invisible
   visibility hidden
 ripples

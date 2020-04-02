@@ -1,6 +1,7 @@
 body,
 html {
-  background-color: #fff;
+  background-color: #f9f9f9;
+  overflow: hidden;
 }
 body *,
 html * {
@@ -10,6 +11,18 @@ html * {
 body .md-toolbar-tools,
 html .md-toolbar-tools {
   display: flex;
+}
+body .logo-container,
+html .logo-container {
+  background-color: transparent;
+}
+body .logo-container .logo,
+html .logo-container .logo {
+  background-image: url("images/logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
 }
 body md-content::before,
 html md-content::before {
@@ -24,11 +37,12 @@ html md-content::before {
   background-image: url("images/pizza.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: 45% 130px;
   background-color: rgba(255,255,255,0.5);
 }
 body md-content,
 html md-content {
+  background-color: transparent;
   position: relative;
   z-index: 1;
 }
@@ -63,9 +77,21 @@ body md-content md-card .item-media.large,
 html md-content md-card .item-media.large {
   background-size: contain;
 }
+body md-content md-card .item-media.medium,
+html md-content md-card .item-media.medium {
+  height: 200px;
+  width: 200px;
+}
+body md-content md-card .item-media.large,
+html md-content md-card .item-media.large {
+  height: 250px;
+  width: 250px;
+}
 body md-content md-card.selected,
 html md-content md-card.selected {
   border: 3px solid #008000;
+  background-color: rgba(228,126,35,0.85);
+  color: #fff;
 }
 .invisible {
   visibility: hidden;

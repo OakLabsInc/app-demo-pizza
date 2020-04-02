@@ -6,29 +6,35 @@ html(ng-app="demoApp")
   body(ng-controller="appController" ng-click="tapped($event)" ng-mousemove="mouseMoved($event)" ng-cloak="")
     ripples
       .ripple(ng-repeat="r in ripples", ng-style="{ top: r.y + 'px', left: r.x + 'px' }")
-    md-toolbar.md-hue-2
-      .md-toolbar-tools( layout="row" layout-align="center center" flex )
-        h2.md-flex Order Pizzas
+
     md-content(layout="column" layout-align="start center" flex layout-fill )
-      h2 Pick A Size
+      div.logo-container(layout="row" layout-align="center center" )
+        .logo
+      h2.md-headline Pick a Size
       .pick-size(layout="row" layout-align="space-around center")
         md-card.pizza-item(ng-repeat="item in pizza.items"  flex="50" ng-click="changePizzaOrder(item,$event)")
             md-card-title
-              md-card-title-text {{item.size | capitalize}} {{item.price | currency}}
+              md-card-title-text(layout="column" layout-align="start start") 
+                span.md-headline {{item.size | capitalize}}
+                span {{item.price | currency}}
               md-card-title-media
-                div.md-media-lg.card-media.item-media(ng-class="[item.size]" ng-style="{'background-image':'url(images/pizza.jpg)'}")
-      h2 Pick Meats
+                div.md-media-lg.card-media.item-media(ng-class="[item.size]" ng-style="{'background-image':'url(images/pizza.png)'}")
+      h2.md-headline Pick Meats
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
         md-card.modifier-item(ng-repeat="meat in pizza.modifiers.meats" flex="33"  ng-click="toggleModifier(meat,$event)" )
           md-card-title
-            md-card-title-text {{meat.name  | capitalize | deslug}} {{meat.price | currency}}
+            md-card-title-text(layout="column" layout-align="start start")
+              span.md-headline {{meat.name  | capitalize | deslug}}
+              span {{meat.price | currency}}
             md-card-title-media
               div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ meat.name+'.jpg)'}")
-      h2 Pick Veggies 
+      h2.md-headline Pick Veggies 
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
         md-card.modifier-item(ng-repeat="veggie in pizza.modifiers.veggies"  flex="33" ng-click="toggleModifier(veggie,$event)")
           md-card-title
-            md-card-title-text {{veggie.name | capitalize | deslug}} {{veggie.price | currency}}
+            md-card-title-text(layout="column" layout-align="start start")
+              span.md-headline {{veggie.name | capitalize | deslug}}
+              span {{veggie.price | currency}}
             md-card-title-media
               div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ veggie.name +'.jpg)'}")
       

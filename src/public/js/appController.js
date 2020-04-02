@@ -103,6 +103,7 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
     }
     
     $scope.showCart = function(pizzaToAdd, ev) {
+      pizzaToAdd.total = $scope.pizzaTotal
       $scope.cart.push(pizzaToAdd)
       // Appending dialog to document.body to cover sidenav in docs app
       var cartView = $mdDialog.show({

@@ -9,39 +9,37 @@
     <ripples>
       <div class="ripple" ng-repeat="r in ripples" ng-style="{ top: r.y + 'px', left: r.x + 'px' }"></div>
     </ripples>
-    <md-toolbar class="md-hue-2">
-      <div class="md-toolbar-tools" layout="row" layout-align="center center" flex="flex">
-        <h2 class="md-flex">Order Pizzas</h2>
-      </div>
-    </md-toolbar>
     <md-content layout="column" layout-align="start center" flex="flex" layout-fill="layout-fill">
-      <h2>Pick A Size</h2>
+      <div class="logo-container" layout="row" layout-align="center center">
+        <div class="logo"></div>
+      </div>
+      <h2 class="md-headline">Pick a Size</h2>
       <div class="pick-size" layout="row" layout-align="space-around center">
         <md-card class="pizza-item" ng-repeat="item in pizza.items" flex="50" ng-click="changePizzaOrder(item,$event)">
           <md-card-title>
-            <md-card-title-text>{{item.size | capitalize}} {{item.price | currency}}</md-card-title-text>
+            <md-card-title-text layout="column" layout-align="start start"> <span class="md-headline">{{item.size | capitalize}}</span><span>{{item.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
-              <div class="md-media-lg card-media item-media" ng-class="[item.size]" ng-style="{'background-image':'url(images/pizza.jpg)'}"></div>
+              <div class="md-media-lg card-media item-media" ng-class="[item.size]" ng-style="{'background-image':'url(images/pizza.png)'}"></div>
             </md-card-title-media>
           </md-card-title>
         </md-card>
       </div>
-      <h2>Pick Meats</h2>
+      <h2 class="md-headline">Pick Meats</h2>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
         <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-click="toggleModifier(meat,$event)">
           <md-card-title>
-            <md-card-title-text>{{meat.name  | capitalize | deslug}} {{meat.price | currency}}</md-card-title-text>
+            <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{meat.name  | capitalize | deslug}}</span><span>{{meat.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
               <div class="md-media-lg card-media item-media" ng-style="{'background-image':'url(images/'+ meat.name+'.jpg)'}"></div>
             </md-card-title-media>
           </md-card-title>
         </md-card>
       </div>
-      <h2>Pick Veggies </h2>
+      <h2 class="md-headline">Pick Veggies </h2>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
         <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-click="toggleModifier(veggie,$event)">
           <md-card-title>
-            <md-card-title-text>{{veggie.name | capitalize | deslug}} {{veggie.price | currency}}</md-card-title-text>
+            <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{veggie.name | capitalize | deslug}}</span><span>{{veggie.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
               <div class="md-media-lg card-media item-media" ng-style="{'background-image':'url(images/'+ veggie.name +'.jpg)'}"></div>
             </md-card-title-media>
