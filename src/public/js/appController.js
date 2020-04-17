@@ -1,4 +1,4 @@
-app.controller('appController', function ($document, $element, $log, $sce, $timeout, $scope, $http, $window, $mdDialog, oak, _, dataService) {
+app.controller('appController', function ($document, $element, $log, $sce, $timeout, $scope, $http, $window, $mdDialog, oak, _, dataService, epson) {
     // ripples
     $scope.untapped = true
     $scope.cursor = {
@@ -127,18 +127,41 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
         $scope.status = 'You decided to keep your debt.';
       });
     }
+    $scope.printReceipt = function(){
+      console.log("Cart: ", $scope.cart)
+      let subtotal = _($scope.cart).sumBy('total')
+      let tax = subtotal * .086
+      let total = _($scope.cart).sumBy('total') + tax
+      $http({
+        method: 'POST',
+        url: 'http://localhost:9001/print-receipt',
+        data: {
+                'cart': $scope.cart,
+                'env': $scope.env,
+                'subtotal': subtotal,
+                'tax': tax,
+                'total': total
+              }
+      }).then(function successCallback (success) {
+        console.log(success)
+    
+      }, function errorCallback (error) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      })
+    }
     $scope.initApp = function (data) {
-        $http({
-            method: 'GET',
-            url: '/getProductData/pizza'
-          }).then(function successCallback (response) {
-            $scope.pizzas = response.data
+      $http({
+        method: 'GET',
+        url: 'http://localhost:9001/env'
+      }).then(function (success) {
+        $scope.env = success.data
         
-          }, function errorCallback (response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-          })
-          
+        oak.ready()
+    
+      }, function (error) {
+        console.log(error)
+      }) 
     }
 
     $scope.idleTimeout = function(ev) {
@@ -159,6 +182,7 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
       $scope.timer = setTimeout($scope.timedOut, 120000);  // time is in milliseconds
     }
     
-    oak.ready()   
+    $scope.initApp()
+       
 
   })

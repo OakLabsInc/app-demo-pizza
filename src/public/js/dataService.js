@@ -4,17 +4,17 @@ app.factory('dataService', function() {
         return {
           "items": [
             {
-              "size": "small",
+              "name": "small",
               "price": 10,
               "modifiers": []
             },
             {
-              "size": "medium",
+              "name": "medium",
               "price": 15,
               "modifiers": []
             },
             {
-              "size": "large",
+              "name": "large",
               "price": 20,
               "modifiers": []
             }

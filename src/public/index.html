@@ -17,16 +17,16 @@
       <div class="pick-size" layout="row" layout-align="space-around center">
         <md-card class="pizza-item" ng-repeat="item in pizza.items" flex="50" ng-click="changePizzaOrder(item,$event)">
           <md-card-title>
-            <md-card-title-text layout="column" layout-align="start start"> <span class="md-headline">{{item.size | capitalize}}</span><span>{{item.price | currency}}</span></md-card-title-text>
+            <md-card-title-text layout="column" layout-align="start start"> <span class="md-headline">{{item.name | capitalize}}</span><span>{{item.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
-              <div class="md-media-lg card-media item-media" ng-class="[item.size]" ng-style="{'background-image':'url(images/pizza.png)'}"></div>
+              <div class="md-media-lg card-media item-media" ng-class="[item.name]" ng-style="{'background-image':'url(images/pizza.png)'}"></div>
             </md-card-title-media>
           </md-card-title>
         </md-card>
       </div>
       <h2 class="md-headline">Pick Meats</h2>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
-        <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.size}">
+        <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.name}">
           <md-card-title>
             <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{meat.name  | capitalize | deslug}}</span><span>{{meat.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
@@ -37,7 +37,7 @@
       </div>
       <h2 class="md-headline">Pick Veggies </h2>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
-        <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.size}">
+        <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.name}">
           <md-card-title>
             <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{veggie.name | capitalize | deslug}}</span><span>{{veggie.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
@@ -60,7 +60,7 @@
             <div class="order">
               <div class="cart-items" ng-repeat="item in cart track by $index">
                 <md-divider class="bottom-space"></md-divider>
-                <div class="item" layout="row" layout-align="space-between start"><span>{{item.size | capitalize}} Pizza</span><span>{{item.price | currency}}</span></div>
+                <div class="item" layout="row" layout-align="space-between start"><span>{{item.name | capitalize}} Pizza</span><span>{{item.price | currency}}</span></div>
                 <div class="item-description md-subhead" ng-repeat="mod in item.modifiers" layout="row" layout-align="space-between start"><span>{{mod.name | capitalize}} Topping</span><span>{{mod.price | currency}}</span></div>
               </div>
               <md-divider class="top-space bottom-space"></md-divider>
@@ -70,11 +70,13 @@
           </md-dialog-content>
           <md-dialog-actions>
             <button class="md-button md-primary md-raised" ng-click="makeAnotherPizza()">Add Another Pizza</button>
-            <button class="md-button md-primary md-raised" ng-click="checkOutNow()">Checkout Now</button>
+            <button class="md-button md-primary md-raised" ng-click="printReceipt()">Print Receipt</button>
           </md-dialog-actions>
         </md-dialog>
       </div>
     </div>
+    <canvas id="printer-canvas"></canvas>
+    <div style="display:none"><img id="printer-image-source" src="images/printer-logo.png" width="256" height="256"/></div>
     <script src="vendor/lodash.min.js"></script>
     <script src="vendor/angular.min.js"></script>
     <script src="vendor/angular-animate.min.js"></script>
