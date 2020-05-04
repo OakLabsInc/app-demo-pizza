@@ -8,6 +8,14 @@ html * {
   outline: none;
   box-sizing: border-box;
 }
+body .center,
+html .center {
+  text-align: center;
+}
+body button.cart-button,
+html button.cart-button {
+  color: #000 !important;
+}
 body md-divider.top-space,
 html md-divider.top-space {
   margin-top: 5px;
@@ -29,8 +37,24 @@ html .logo-container .logo {
   background-image: url("images/logo.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
+}
+body .qrcode,
+html .qrcode {
+  background-color: #1c1c1c;
+  min-height: 111px;
+  padding: 0;
+}
+body .qrcode .qrcode-message,
+html .qrcode .qrcode-message {
+  text-align: center;
+}
+body .qrcode .qrcode-backdrop,
+html .qrcode .qrcode-backdrop {
+  background-color: #fff;
+  min-width: 111px;
+  min-height: 111px;
 }
 body md-content::before,
 html md-content::before {
@@ -53,6 +77,10 @@ html md-content {
   background-color: transparent;
   position: relative;
   z-index: 1;
+}
+body md-content.main,
+html md-content.main {
+  padding: 0 !important;
 }
 body md-content h2,
 html md-content h2 {

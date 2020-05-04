@@ -9,11 +9,11 @@
     <ripples>
       <div class="ripple" ng-repeat="r in ripples" ng-style="{ top: r.y + 'px', left: r.x + 'px' }"></div>
     </ripples>
-    <md-content layout="column" layout-align="start center" flex="flex" layout-fill="layout-fill">
+    <md-content class="main" layout="column" layout-align="space-between  stretch" flex="flex" layout-fill="layout-fill">
       <div class="logo-container" layout="row" layout-align="center center">
         <div class="logo"></div>
       </div>
-      <h2 class="md-headline">Pick a Size</h2>
+      <div class="md-headline center">Pick a Size</div>
       <div class="pick-size" layout="row" layout-align="space-around center">
         <md-card class="pizza-item" ng-repeat="item in pizza.items" flex="50" ng-click="changePizzaOrder(item,$event)">
           <md-card-title>
@@ -24,7 +24,7 @@
           </md-card-title>
         </md-card>
       </div>
-      <h2 class="md-headline">Pick Meats</h2>
+      <div class="md-headline center">Pick Meats</div>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
         <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.name}">
           <md-card-title>
@@ -35,7 +35,7 @@
           </md-card-title>
         </md-card>
       </div>
-      <h2 class="md-headline">Pick Veggies </h2>
+      <div class="md-headline center">Pick Veggies </div>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
         <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.name}">
           <md-card-title>
@@ -46,10 +46,19 @@
           </md-card-title>
         </md-card>
       </div>
-      <div class="pizza-total" layout="column" layout-align="center center" ng-cloak="ng-cloak" ng-if="pizzaTotal"> 
-        <div class="total md-headline">Total</div>
-        <div class="amount">{{pizzaTotal | currency}}</div>
-        <md-button class="md-primary md-raised" ng-click="showCart(pizzaOrder, $event)">Add To Cart</md-button>
+      <div class="bottom-wrapper" layout="column" layout-align="space-between none" ng-cloak="ng-cloak">
+        <md-toolbar class="demo-total" layout="row" layout-align="space-between center" layout-padding="layout-padding"> 
+          <div class="total md-subhead" layout="row" layout-align="start center"> <span>CART {{cart.length}} Items </span>
+            <button class="md-button md-raised cart-button" ng-click="showCart(pizzaOrder, $event)">Add To Cart</button>
+          </div>
+          <div class="total md-subhead" ng-if="cart.total">Total {{cart.total | currency}}</div>
+        </md-toolbar>
+        <md-toolbar class="qrcode" layout="row" layout-align="end center" ng-cloak="ng-cloak">
+          <div class="qrcode-message" layout="row" layout-align="end" layout-padding="layout-padding">
+            <div flex="flex">Scan this QR Code to control the screen cursor</div>
+          </div>
+          <div class="qrcode-backdrop">QRCODE</div>
+        </md-toolbar>
       </div>
     </md-content>
     <div class="invisible">
@@ -70,9 +79,39 @@
           </md-dialog-content>
           <md-dialog-actions>
             <button class="md-button md-primary md-raised" ng-click="makeAnotherPizza()">Add Another Pizza</button>
-            <button class="md-button md-primary md-raised" ng-click="printReceipt()">Print Receipt</button>
+            <button class="md-button md-primary md-raised" ng-click="checkout(&quot;waitingForTerminal&quot;, $event)">Checkout Now</button>
           </md-dialog-actions>
         </md-dialog>
+      </div>
+      <div class="invisible">
+        <div class="md-dialog-container" id="waitingForTerminal">
+          <md-dialog flex="70">
+            <md-dialog-content class="md-dialog-content" layout="column" layout-align="center center">
+              <h2 class="md-headline" layout-align="center">Processing</h2>
+              <div>Please insert you card in the terminal to the right</div>
+              <div>&nbsp;</div>
+              <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </md-dialog-content>
+            <md-dialog-actions>
+              <button class="md-button md-primary md-raised" ng-click="continueShopping()">Cancel Check Out</button>
+            </md-dialog-actions>
+          </md-dialog>
+        </div>
+      </div>
+      <div class="invisible">
+        <div class="md-dialog-container" id="showApproved">
+          <md-dialog flex="70">
+            <md-dialog-content class="md-dialog-content" layout="column" layout-align="center center">
+              <h2 class="md-headline" layout-align="center">Approved</h2>
+              <div>Your order purchase was approved. You may print a receipt.</div>
+              <div>&nbsp;</div>
+            </md-dialog-content>
+            <md-dialog-actions>
+              <button class="md-button md-primary md-raised" ng-click="printReceipt()">Print Receipt</button>
+              <button class="md-button md-primary md-raised" ng-click="finishShopping()">Finish</button>
+            </md-dialog-actions>
+          </md-dialog>
+        </div>
       </div>
     </div>
     <canvas id="printer-canvas"></canvas>

@@ -7,19 +7,19 @@ html(ng-app="demoApp")
     ripples
       .ripple(ng-repeat="r in ripples", ng-style="{ top: r.y + 'px', left: r.x + 'px' }")
 
-    md-content(layout="column" layout-align="start center" flex layout-fill )
+    md-content.main(layout="column" layout-align="space-between  stretch" flex layout-fill )
       div.logo-container(layout="row" layout-align="center center" )
         .logo
-      h2.md-headline Pick a Size
+      div.md-headline.center Pick a Size
       .pick-size(layout="row" layout-align="space-around center")
         md-card.pizza-item(ng-repeat="item in pizza.items"  flex="50" ng-click="changePizzaOrder(item,$event)" )
-            md-card-title
-              md-card-title-text(layout="column" layout-align="start start") 
-                span.md-headline {{item.name | capitalize}}
-                span {{item.price | currency}}
-              md-card-title-media
-                div.md-media-lg.card-media.item-media(ng-class="[item.name]" ng-style="{'background-image':'url(images/pizza.png)'}")
-      h2.md-headline Pick Meats
+          md-card-title
+            md-card-title-text(layout="column" layout-align="start start") 
+              span.md-headline {{item.name | capitalize}}
+              span {{item.price | currency}}
+            md-card-title-media
+              div.md-media-lg.card-media.item-media(ng-class="[item.name]" ng-style="{'background-image':'url(images/pizza.png)'}")
+      div.md-headline.center Pick Meats
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
         md-card.modifier-item(ng-repeat="meat in pizza.modifiers.meats" flex="33"  ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.name}")
           md-card-title
@@ -28,7 +28,7 @@ html(ng-app="demoApp")
               span {{meat.price | currency}}
             md-card-title-media
               div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ meat.name+'.jpg)'}")
-      h2.md-headline Pick Veggies 
+      div.md-headline.center Pick Veggies 
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
         md-card.modifier-item(ng-repeat="veggie in pizza.modifiers.veggies"  flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.name}")
           md-card-title
@@ -38,10 +38,21 @@ html(ng-app="demoApp")
             md-card-title-media
               div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ veggie.name +'.jpg)'}")
       
-      .pizza-total(layout="column" layout-align="center center" ng-cloak ng-if="pizzaTotal") 
-        .total.md-headline Total
-        .amount {{pizzaTotal | currency}}
-        md-button.md-primary.md-raised(ng-click="showCart(pizzaOrder, $event)") Add To Cart
+      //- .pizza-total(layout="column" layout-align="center center" ng-cloak ng-if="pizzaTotal") 
+      //-   .total.md-headline Total
+      //-   .amount {{pizzaTotal | currency}}
+      //-   md-button.md-primary.md-raised(ng-click="showCart(pizzaOrder, $event)") Add To Cart
+      .bottom-wrapper(layout="column" layout-align="space-between none" ng-cloak)
+        md-toolbar.demo-total(layout="row" layout-align="space-between center" layout-padding) 
+          .total.md-subhead(layout="row" layout-align="start center") 
+            span CART {{cart.length}} Items 
+            button.md-button.md-raised.cart-button(ng-click='showCart(pizzaOrder, $event)') Add To Cart
+
+          .total.md-subhead(ng-if="cart.total") Total {{cart.total | currency}}
+        md-toolbar.qrcode(layout="row" layout-align="end center"  ng-cloak)
+          .qrcode-message(layout="row" layout-align="end" layout-padding)
+            div(flex) Scan this QR Code to control the screen cursor
+          .qrcode-backdrop QRCODE
     .invisible
         .md-dialog-container#addToCartDialog
           md-dialog
@@ -64,7 +75,28 @@ html(ng-app="demoApp")
 
             md-dialog-actions
               button.md-button.md-primary.md-raised(ng-click='makeAnotherPizza()') Add Another Pizza
-              button.md-button.md-primary.md-raised(ng-click='printReceipt()') Print Receipt
+              button.md-button.md-primary.md-raised(ng-click='checkout("waitingForTerminal", $event)') Checkout Now
+        .invisible
+          .md-dialog-container#waitingForTerminal
+              md-dialog(flex=70)
+                md-dialog-content.md-dialog-content(layout='column' layout-align="center center")
+                  h2.md-headline(layout-align="center") Processing
+                  div Please insert you card in the terminal to the right
+                  div &nbsp;
+                  md-progress-circular(md-mode="indeterminate")
+                md-dialog-actions
+                  button.md-button.md-primary.md-raised(ng-click='continueShopping()') Cancel Check Out
+        .invisible
+          .md-dialog-container#showApproved
+              md-dialog(flex=70)
+                md-dialog-content.md-dialog-content(layout='column' layout-align="center center")
+                  h2.md-headline(layout-align="center") Approved
+                  div Your order purchase was approved. You may print a receipt.
+                  div &nbsp;
+
+                md-dialog-actions
+                  button.md-button.md-primary.md-raised(ng-click='printReceipt()') Print Receipt
+                  button.md-button.md-primary.md-raised(ng-click='finishShopping()') Finish
     canvas(id="printer-canvas")
     div(style="display:none")
       img(id="printer-image-source" src="images/printer-logo.png" width="256" height="256")

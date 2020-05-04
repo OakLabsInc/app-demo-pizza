@@ -5,6 +5,10 @@ body, html
   *
     outline: none
     box-sizing: border-box
+  .center 
+    text-align center
+  button.cart-button
+    color rgb(0,0,0)!important
   md-divider
     &.top-space
       margin-top 5px
@@ -18,9 +22,19 @@ body, html
       background-image url(images/logo.png)
       background-repeat no-repeat
       background-size cover
-      width 300px
-      height 300px
+      width 200px
+      height 200px
+  .qrcode
+    background-color rgb(28, 28, 28)
+    min-height 111px
+    padding 0
+    .qrcode-message
+      text-align center
 
+    .qrcode-backdrop
+      background-color rgb(255, 255, 255)
+      min-width 111px
+      min-height 111px
   md-content::before
     content: " ";
     position: absolute;
@@ -38,8 +52,10 @@ body, html
     background-color rgba(255,255,255,.5)
   md-content
     background-color transparent
-    position: relative;
-    z-index: 1;
+    position relative
+    z-index 1
+    &.main
+      padding 0!important
     h2
       color #000000
     md-card

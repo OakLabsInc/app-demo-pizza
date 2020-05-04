@@ -150,6 +150,39 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
         // or server returns response with an error status.
       })
     }
+    $scope.continueShopping = function() {
+      $scope.selectedTypeIndex = 0
+      $mdDialog.hide()
+    }
+
+    $scope.finishShopping = function() {
+      $scope.cart = []
+      $mdDialog.hide()
+    }
+    
+    $scope.showPrompt = function(id, ev) {
+      var showPrompt = $mdDialog.show({
+        scope: $scope,
+        preserveScope: true,
+        contentElement: `#${id}`,
+        parent: window.angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: false,
+        fullscreen: false
+      })
+    }
+    
+    $scope.checkout = function(id,ev) {
+      $mdDialog.hide()
+      $scope.showPrompt(id,ev)
+      console.log($scope.cart)
+      $timeout(function(){
+        $mdDialog.hide()
+        $scope.showPrompt('showApproved',ev)
+      },4000)
+    }
+
+
     $scope.initApp = function (data) {
       $http({
         method: 'GET',
