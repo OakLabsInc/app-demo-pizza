@@ -79,7 +79,7 @@
           </md-dialog-content>
           <md-dialog-actions>
             <button class="md-button md-primary md-raised" ng-click="makeAnotherPizza()">Add Another Pizza</button>
-            <button class="md-button md-primary md-raised" ng-click="checkout(&quot;waitingForTerminal&quot;, $event)">Checkout Now</button>
+            <button class="md-button md-primary md-raised" ng-click="checkout(&quot;waitingForTerminal&quot;, $event)" ng-disabled="!cart.length">Checkout Now</button>
           </md-dialog-actions>
         </md-dialog>
       </div>
@@ -92,9 +92,6 @@
               <div>&nbsp;</div>
               <md-progress-circular md-mode="indeterminate"></md-progress-circular>
             </md-dialog-content>
-            <md-dialog-actions>
-              <button class="md-button md-primary md-raised" ng-click="continueShopping()">Cancel Check Out</button>
-            </md-dialog-actions>
           </md-dialog>
         </div>
       </div>
@@ -108,6 +105,36 @@
             </md-dialog-content>
             <md-dialog-actions>
               <button class="md-button md-primary md-raised" ng-click="printReceipt()">Print Receipt</button>
+              <button class="md-button md-primary md-raised" ng-click="finishShopping()">Finish</button>
+            </md-dialog-actions>
+          </md-dialog>
+        </div>
+      </div>
+      <div class="invisible">
+        <div class="md-dialog-container" id="showDenied">
+          <md-dialog flex="70">
+            <md-dialog-content class="md-dialog-content" layout="column" layout-align="center center">
+              <h2 class="md-headline" layout-align="center">Denied</h2>
+              <div>Your order purchase was denied. Please finish or continue shoppping.</div>
+              <div>&nbsp;</div>
+            </md-dialog-content>
+            <md-dialog-actions>
+              <button class="md-button md-primary md-raised" ng-click="continueShopping()">Continue Shopping</button>
+              <button class="md-button md-primary md-raised" ng-click="finishShopping()">Finish</button>
+            </md-dialog-actions>
+          </md-dialog>
+        </div>
+      </div>
+      <div class="invisible">
+        <div class="md-dialog-container" id="errorOccured">
+          <md-dialog flex="70">
+            <md-dialog-content class="md-dialog-content" layout="column" layout-align="center center">
+              <h2 class="md-headline" layout-align="center">Error</h2>
+              <div>An error occured. PLease try again later</div>
+              <div>&nbsp;</div>
+            </md-dialog-content>
+            <md-dialog-actions>
+              <button class="md-button md-primary md-raised" ng-click="continueShopping()">Continue Shopping</button>
               <button class="md-button md-primary md-raised" ng-click="finishShopping()">Finish</button>
             </md-dialog-actions>
           </md-dialog>

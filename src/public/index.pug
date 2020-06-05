@@ -75,7 +75,7 @@ html(ng-app="demoApp")
 
             md-dialog-actions
               button.md-button.md-primary.md-raised(ng-click='makeAnotherPizza()') Add Another Pizza
-              button.md-button.md-primary.md-raised(ng-click='checkout("waitingForTerminal", $event)') Checkout Now
+              button.md-button.md-primary.md-raised(ng-click='checkout("waitingForTerminal", $event)'  ng-disabled="!cart.length") Checkout Now
         .invisible
           .md-dialog-container#waitingForTerminal
               md-dialog(flex=70)
@@ -84,8 +84,8 @@ html(ng-app="demoApp")
                   div Please insert you card in the terminal to the right
                   div &nbsp;
                   md-progress-circular(md-mode="indeterminate")
-                md-dialog-actions
-                  button.md-button.md-primary.md-raised(ng-click='continueShopping()') Cancel Check Out
+                //- md-dialog-actions
+                //-   button.md-button.md-primary.md-raised(ng-click='finishShopping()') Cancel Order
         .invisible
           .md-dialog-container#showApproved
               md-dialog(flex=70)
@@ -96,6 +96,28 @@ html(ng-app="demoApp")
 
                 md-dialog-actions
                   button.md-button.md-primary.md-raised(ng-click='printReceipt()') Print Receipt
+                  button.md-button.md-primary.md-raised(ng-click='finishShopping()') Finish
+        .invisible
+          .md-dialog-container#showDenied
+              md-dialog(flex=70)
+                md-dialog-content.md-dialog-content(layout='column' layout-align="center center")
+                  h2.md-headline(layout-align="center") Denied
+                  div Your order purchase was denied. Please finish or continue shoppping.
+                  div &nbsp;
+
+                md-dialog-actions
+                  button.md-button.md-primary.md-raised(ng-click='continueShopping()') Continue Shopping
+                  button.md-button.md-primary.md-raised(ng-click='finishShopping()') Finish
+        .invisible
+          .md-dialog-container#errorOccured
+              md-dialog(flex=70)
+                md-dialog-content.md-dialog-content(layout='column' layout-align="center center")
+                  h2.md-headline(layout-align="center") Error
+                  div An error occured. PLease try again later
+                  div &nbsp;
+
+                md-dialog-actions
+                  button.md-button.md-primary.md-raised(ng-click='continueShopping()') Continue Shopping
                   button.md-button.md-primary.md-raised(ng-click='finishShopping()') Finish
     canvas(id="printer-canvas")
     div(style="display:none")

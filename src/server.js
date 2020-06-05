@@ -7,7 +7,7 @@ oak.catchErrors()
 const express = require('express')
 const app = express()
 
-const port = process.env.PORT ? _.toNumber(process.env.PORT) : 9500
+const port = process.env.PORT ? _.toNumber(process.env.PORT) : 9100
 
 
 let publicPath = join(__dirname, 'public')
