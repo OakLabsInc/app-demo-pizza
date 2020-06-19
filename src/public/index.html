@@ -49,7 +49,7 @@
       <div class="bottom-wrapper" layout="column" layout-align="space-between none" ng-cloak="ng-cloak">
         <md-toolbar class="demo-total" layout="row" layout-align="space-between center" layout-padding="layout-padding"> 
           <div class="total md-subhead" layout="row" layout-align="start center"> <span>CART {{cart.length}} Items </span>
-            <button class="md-button md-raised cart-button" ng-click="showCart(pizzaOrder, $event)">Add To Cart</button>
+            <button class="md-button md-raised cart-button" ng-click="showCart(pizzaOrder, $event)" ng-disabled="noPizzaSelection(pizzaOrder)">Add To Cart</button>
           </div>
           <div class="total md-subhead" ng-if="cart.total">Total {{cart.total | currency}}</div>
         </md-toolbar>
@@ -79,6 +79,7 @@
           </md-dialog-content>
           <md-dialog-actions>
             <button class="md-button md-primary md-raised" ng-click="makeAnotherPizza()">Add Another Pizza</button>
+            <button class="md-button md-primary md-raised" ng-click="printReceipt()">Print Receipt</button>
             <button class="md-button md-primary md-raised" ng-click="checkout(&quot;waitingForTerminal&quot;, $event)" ng-disabled="!cart.length">Checkout Now</button>
           </md-dialog-actions>
         </md-dialog>

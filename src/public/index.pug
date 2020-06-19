@@ -46,13 +46,14 @@ html(ng-app="demoApp")
         md-toolbar.demo-total(layout="row" layout-align="space-between center" layout-padding) 
           .total.md-subhead(layout="row" layout-align="start center") 
             span CART {{cart.length}} Items 
-            button.md-button.md-raised.cart-button(ng-click='showCart(pizzaOrder, $event)') Add To Cart
+            button.md-button.md-raised.cart-button(ng-click='showCart(pizzaOrder, $event)' ng-disabled="noPizzaSelection(pizzaOrder)") Add To Cart
 
           .total.md-subhead(ng-if="cart.total") Total {{cart.total | currency}}
         md-toolbar.qrcode(layout="row" layout-align="end center"  ng-cloak)
           .qrcode-message(layout="row" layout-align="end" layout-padding)
             div(flex) Scan this QR Code to control the screen cursor
           .qrcode-backdrop QRCODE
+      
     .invisible
         .md-dialog-container#addToCartDialog
           md-dialog
@@ -75,6 +76,7 @@ html(ng-app="demoApp")
 
             md-dialog-actions
               button.md-button.md-primary.md-raised(ng-click='makeAnotherPizza()') Add Another Pizza
+              button.md-button.md-primary.md-raised(ng-click='printReceipt()') Print Receipt
               button.md-button.md-primary.md-raised(ng-click='checkout("waitingForTerminal", $event)'  ng-disabled="!cart.length") Checkout Now
         .invisible
           .md-dialog-container#waitingForTerminal

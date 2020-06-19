@@ -78,6 +78,9 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
         
 
     }
+    $scope.noPizzaSelection = function(pizzaOrder){
+      return !pizzaOrder.hasOwnProperty('name') 
+    }
 
     $scope.toggleModifier = function(mod,e) {
         if($scope.pizzaOrder.modifiers.indexOf(mod) < 0){
@@ -246,12 +249,20 @@ app.controller('appController', function ($document, $element, $log, $sce, $time
     }
 
     $scope.timedOut = function(){
-      oak.reload()
+      let url = 'http://localhost:' + $scope.env.PORT + '/qrcode/restart'
+      $http.get(url).then( function(success){
+        console.log("/qrcode/restart: ", success)
+      }, function(error){
+        console.log("ERROR: ", error)
+      })
     }
+    oak.on('pageReload', function(){
+      oak.reload()
+    })
 
     $scope.resetTimer = function() {
       clearTimeout($scope.timer);
-      $scope.timer = setTimeout($scope.timedOut, 120000);  // time is in milliseconds
+      $scope.timer = setTimeout($scope.timedOut, parseInt($scope.env.IDLE_TIMEOUT) * 1000);  // time is in milliseconds
     }
     
     $scope.initApp()
