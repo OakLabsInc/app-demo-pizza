@@ -5,7 +5,7 @@
     <link href="vendor/angular-material.min.css" rel="stylesheet" type="text/css"/>
     <link href="index.css" rel="stylesheet" type="text/css"/>
   </head>
-  <body ng-controller="appController" ng-click="tapped($event); idleTimeout()" ng-mousemove="mouseMoved($event)" ng-cloak="">
+  <body ng-controller="appController" ng-mousedown="tapped($event); idleTimeout()" ng-mousemove="mouseMoved($event)" ng-cloak="">
     <ripples>
       <div class="ripple" ng-repeat="r in ripples" ng-style="{ top: r.y + 'px', left: r.x + 'px' }"></div>
     </ripples>
@@ -15,7 +15,7 @@
       </div>
       <div class="md-headline center">Pick a Size</div>
       <div class="pick-size" layout="row" layout-align="space-around center">
-        <md-card class="pizza-item" ng-repeat="item in pizza.items" flex="50" ng-click="changePizzaOrder(item,$event)">
+        <md-card class="pizza-item" ng-repeat="item in pizza.items" flex="50" ng-mousedown="changePizzaOrder(item,$event)">
           <md-card-title>
             <md-card-title-text layout="column" layout-align="start start"> <span class="md-headline">{{item.name | capitalize}}</span><span>{{item.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
@@ -26,7 +26,7 @@
       </div>
       <div class="md-headline center">Pick Meats</div>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
-        <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.name}">
+        <md-card class="modifier-item" ng-repeat="meat in pizza.modifiers.meats" flex="33" ng-mousedown="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.name}">
           <md-card-title>
             <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{meat.name  | capitalize | deslug}}</span><span>{{meat.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
@@ -37,7 +37,7 @@
       </div>
       <div class="md-headline center">Pick Veggies </div>
       <div class="pick-size" layout="row" layout-align="center center" layout-wrap="layout-wrap" ng-cloak="ng-cloak">
-        <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.name}">
+        <md-card class="modifier-item" ng-repeat="veggie in pizza.modifiers.veggies" flex="33" ng-mousedown="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.name}">
           <md-card-title>
             <md-card-title-text layout="column" layout-align="start start"><span class="md-headline">{{veggie.name | capitalize | deslug}}</span><span>{{veggie.price | currency}}</span></md-card-title-text>
             <md-card-title-media>
@@ -49,7 +49,7 @@
       <div class="bottom-wrapper" layout="column" layout-align="space-between none" ng-cloak="ng-cloak">
         <md-toolbar class="demo-total" layout="row" layout-align="space-between center" layout-padding="layout-padding"> 
           <div class="total md-subhead" layout="row" layout-align="start center"> <span>CART {{cart.length}} Items </span>
-            <button class="md-button md-raised cart-button" ng-click="showCart(pizzaOrder, $event)" ng-disabled="noPizzaSelection(pizzaOrder)">Add To Cart</button>
+            <button class="md-button md-raised cart-button" ng-mousedown="showCart(pizzaOrder, $event)" ng-disabled="noPizzaSelection(pizzaOrder)">Add To Cart</button>
           </div>
           <div class="total md-subhead" ng-if="cart.total">Total {{cart.total | currency}}</div>
         </md-toolbar>
@@ -78,9 +78,9 @@
             </div>
           </md-dialog-content>
           <md-dialog-actions>
-            <button class="md-button md-primary md-raised" ng-click="makeAnotherPizza()">Add Another Pizza</button>
-            <button class="md-button md-primary md-raised" ng-click="printReceipt()">Print Receipt</button>
-            <button class="md-button md-primary md-raised" ng-click="checkout(&quot;waitingForTerminal&quot;, $event)" ng-disabled="!cart.length">Checkout Now</button>
+            <button class="md-button md-primary md-raised" ng-mousedown="makeAnotherPizza()">Add Another Pizza</button>
+            <button class="md-button md-primary md-raised" ng-mousedown="printReceipt()">Print Receipt</button>
+            <button class="md-button md-primary md-raised" ng-mousedown="checkout(&quot;waitingForTerminal&quot;, $event)" ng-disabled="!cart.length">Checkout Now</button>
           </md-dialog-actions>
         </md-dialog>
       </div>
@@ -105,8 +105,8 @@
               <div>&nbsp;</div>
             </md-dialog-content>
             <md-dialog-actions>
-              <button class="md-button md-primary md-raised" ng-click="printReceipt()">Print Receipt</button>
-              <button class="md-button md-primary md-raised" ng-click="finishShopping()">Finish</button>
+              <button class="md-button md-primary md-raised" ng-mousedown="printReceipt()">Print Receipt</button>
+              <button class="md-button md-primary md-raised" ng-mousedown="finishShopping()">Finish</button>
             </md-dialog-actions>
           </md-dialog>
         </div>
@@ -120,8 +120,8 @@
               <div>&nbsp;</div>
             </md-dialog-content>
             <md-dialog-actions>
-              <button class="md-button md-primary md-raised" ng-click="continueShopping()">Continue Shopping</button>
-              <button class="md-button md-primary md-raised" ng-click="finishShopping()">Finish</button>
+              <button class="md-button md-primary md-raised" ng-mousedown="continueShopping()">Continue Shopping</button>
+              <button class="md-button md-primary md-raised" ng-mousedown="finishShopping()">Finish</button>
             </md-dialog-actions>
           </md-dialog>
         </div>
@@ -135,8 +135,8 @@
               <div>&nbsp;</div>
             </md-dialog-content>
             <md-dialog-actions>
-              <button class="md-button md-primary md-raised" ng-click="continueShopping()">Continue Shopping</button>
-              <button class="md-button md-primary md-raised" ng-click="finishShopping()">Finish</button>
+              <button class="md-button md-primary md-raised" ng-mousedown="continueShopping()">Continue Shopping</button>
+              <button class="md-button md-primary md-raised" ng-mousedown="finishShopping()">Finish</button>
             </md-dialog-actions>
           </md-dialog>
         </div>

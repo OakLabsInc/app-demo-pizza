@@ -56,6 +56,14 @@ html .qrcode .qrcode-backdrop {
   min-width: 111px;
   min-height: 111px;
 }
+body .md-button,
+html .md-button {
+  min-height: 60px;
+  min-width: 88px;
+  line-height: 60px;
+  padding: 0 26px;
+  margin: 6px 8px;
+}
 body md-content::before,
 html md-content::before {
   content: " ";

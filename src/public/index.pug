@@ -3,7 +3,7 @@ html(ng-app="demoApp")
     title Pizza Payment Demo
     link(href='vendor/angular-material.min.css', rel='stylesheet', type='text/css')
     link(href='index.css', rel='stylesheet', type='text/css')
-  body(ng-controller="appController" ng-click="tapped($event); idleTimeout()" ng-mousemove="mouseMoved($event)" ng-cloak="")
+  body(ng-controller="appController" ng-mousedown="tapped($event); idleTimeout()" ng-mousemove="mouseMoved($event)" ng-cloak="")
     ripples
       .ripple(ng-repeat="r in ripples", ng-style="{ top: r.y + 'px', left: r.x + 'px' }")
 
@@ -12,7 +12,7 @@ html(ng-app="demoApp")
         .logo
       div.md-headline.center Pick a Size
       .pick-size(layout="row" layout-align="space-around center")
-        md-card.pizza-item(ng-repeat="item in pizza.items"  flex="50" ng-click="changePizzaOrder(item,$event)" )
+        md-card.pizza-item(ng-repeat="item in pizza.items"  flex="50" ng-mousedown="changePizzaOrder(item,$event)" )
           md-card-title
             md-card-title-text(layout="column" layout-align="start start") 
               span.md-headline {{item.name | capitalize}}
@@ -21,7 +21,7 @@ html(ng-app="demoApp")
               div.md-media-lg.card-media.item-media(ng-class="[item.name]" ng-style="{'background-image':'url(images/pizza.png)'}")
       div.md-headline.center Pick Meats
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
-        md-card.modifier-item(ng-repeat="meat in pizza.modifiers.meats" flex="33"  ng-click="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.name}")
+        md-card.modifier-item(ng-repeat="meat in pizza.modifiers.meats" flex="33"  ng-mousedown="toggleModifier(meat,$event)" ng-class="{'no-click': !pizzaOrder.name}")
           md-card-title
             md-card-title-text(layout="column" layout-align="start start")
               span.md-headline {{meat.name  | capitalize | deslug}}
@@ -30,7 +30,7 @@ html(ng-app="demoApp")
               div.md-media-lg.card-media.item-media(ng-style="{'background-image':'url(images/'+ meat.name+'.jpg)'}")
       div.md-headline.center Pick Veggies 
       .pick-size(layout="row" layout-align="center center" layout-wrap ng-cloak)
-        md-card.modifier-item(ng-repeat="veggie in pizza.modifiers.veggies"  flex="33" ng-click="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.name}")
+        md-card.modifier-item(ng-repeat="veggie in pizza.modifiers.veggies"  flex="33" ng-mousedown="toggleModifier(veggie,$event)" ng-class="{'no-click': !pizzaOrder.name}")
           md-card-title
             md-card-title-text(layout="column" layout-align="start start")
               span.md-headline {{veggie.name | capitalize | deslug}}
@@ -41,12 +41,12 @@ html(ng-app="demoApp")
       //- .pizza-total(layout="column" layout-align="center center" ng-cloak ng-if="pizzaTotal") 
       //-   .total.md-headline Total
       //-   .amount {{pizzaTotal | currency}}
-      //-   md-button.md-primary.md-raised(ng-click="showCart(pizzaOrder, $event)") Add To Cart
+      //-   md-button.md-primary.md-raised(ng-mousedown="showCart(pizzaOrder, $event)") Add To Cart
       .bottom-wrapper(layout="column" layout-align="space-between none" ng-cloak)
         md-toolbar.demo-total(layout="row" layout-align="space-between center" layout-padding) 
           .total.md-subhead(layout="row" layout-align="start center") 
             span CART {{cart.length}} Items 
-            button.md-button.md-raised.cart-button(ng-click='showCart(pizzaOrder, $event)' ng-disabled="noPizzaSelection(pizzaOrder)") Add To Cart
+            button.md-button.md-raised.cart-button(ng-mousedown='showCart(pizzaOrder, $event)' ng-disabled="noPizzaSelection(pizzaOrder)") Add To Cart
 
           .total.md-subhead(ng-if="cart.total") Total {{cart.total | currency}}
         md-toolbar.qrcode(layout="row" layout-align="end center"  ng-cloak)
@@ -75,9 +75,9 @@ html(ng-app="demoApp")
                     span Total&nbsp;&nbsp;&nbsp;{{ cart.total | currency}}
 
             md-dialog-actions
-              button.md-button.md-primary.md-raised(ng-click='makeAnotherPizza()') Add Another Pizza
-              button.md-button.md-primary.md-raised(ng-click='printReceipt()') Print Receipt
-              button.md-button.md-primary.md-raised(ng-click='checkout("waitingForTerminal", $event)'  ng-disabled="!cart.length") Checkout Now
+              button.md-button.md-primary.md-raised(ng-mousedown='makeAnotherPizza()') Add Another Pizza
+              button.md-button.md-primary.md-raised(ng-mousedown='printReceipt()') Print Receipt
+              button.md-button.md-primary.md-raised(ng-mousedown='checkout("waitingForTerminal", $event)'  ng-disabled="!cart.length") Checkout Now
         .invisible
           .md-dialog-container#waitingForTerminal
               md-dialog(flex=70)
@@ -87,7 +87,7 @@ html(ng-app="demoApp")
                   div &nbsp;
                   md-progress-circular(md-mode="indeterminate")
                 //- md-dialog-actions
-                //-   button.md-button.md-primary.md-raised(ng-click='finishShopping()') Cancel Order
+                //-   button.md-button.md-primary.md-raised(ng-mousedown='finishShopping()') Cancel Order
         .invisible
           .md-dialog-container#showApproved
               md-dialog(flex=70)
@@ -97,8 +97,8 @@ html(ng-app="demoApp")
                   div &nbsp;
 
                 md-dialog-actions
-                  button.md-button.md-primary.md-raised(ng-click='printReceipt()') Print Receipt
-                  button.md-button.md-primary.md-raised(ng-click='finishShopping()') Finish
+                  button.md-button.md-primary.md-raised(ng-mousedown='printReceipt()') Print Receipt
+                  button.md-button.md-primary.md-raised(ng-mousedown='finishShopping()') Finish
         .invisible
           .md-dialog-container#showDenied
               md-dialog(flex=70)
@@ -108,8 +108,8 @@ html(ng-app="demoApp")
                   div &nbsp;
 
                 md-dialog-actions
-                  button.md-button.md-primary.md-raised(ng-click='continueShopping()') Continue Shopping
-                  button.md-button.md-primary.md-raised(ng-click='finishShopping()') Finish
+                  button.md-button.md-primary.md-raised(ng-mousedown='continueShopping()') Continue Shopping
+                  button.md-button.md-primary.md-raised(ng-mousedown='finishShopping()') Finish
         .invisible
           .md-dialog-container#errorOccured
               md-dialog(flex=70)
@@ -119,8 +119,8 @@ html(ng-app="demoApp")
                   div &nbsp;
 
                 md-dialog-actions
-                  button.md-button.md-primary.md-raised(ng-click='continueShopping()') Continue Shopping
-                  button.md-button.md-primary.md-raised(ng-click='finishShopping()') Finish
+                  button.md-button.md-primary.md-raised(ng-mousedown='continueShopping()') Continue Shopping
+                  button.md-button.md-primary.md-raised(ng-mousedown='finishShopping()') Finish
     canvas(id="printer-canvas")
     div(style="display:none")
       img(id="printer-image-source" src="images/printer-logo.png" width="256" height="256")
